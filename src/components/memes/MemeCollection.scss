@@ -1,0 +1,11 @@
+.container {
+  padding: 0 10%;
+}
+
+.memes {
+  background-color: #1e293b;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 25px;
+}
