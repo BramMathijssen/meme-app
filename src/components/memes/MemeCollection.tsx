@@ -8,7 +8,7 @@ const MemeCollection: React.FC = () => {
     <div className="container">
       <div className="memes">
         {memesData.map((meme) => (
-          <MemeItem key={meme.id} title={meme.title}></MemeItem>
+          <MemeItem key={meme.id} title={meme.title} image={meme.image}></MemeItem>
         ))}
       </div>
     </div>

@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import "./MemeItem.scss";
 
-const MemeItem: React.FC<{title: string}> = (props) => {
+const MemeItem: React.FC<{ title: string; image: string }> = (props) => {
   return (
-    <div> 
-        <h3>{props.title}</h3>
+    <div className="meme-item">
+      <h3 className="meme-item__title">{props.title}</h3>
+      <div className="meme-item__container">
+        <img className="meme-item__image" src={props.image} alt="test"></img>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default MemeItem
+export default MemeItem;

@@ -4,7 +4,7 @@ import './Header.scss';
 const Header: React.FC = () => {
   return (
     <header className="header">
-      <div className="header__logo">Meme App</div>
+      <div className="header__logo">Chonks</div>
       <nav className="header__navigation">
         <ul>
           <li>Register</li>
