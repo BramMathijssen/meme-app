@@ -1,5 +1,3 @@
-import { FolderPlus } from "phosphor-react";
-import React from "react";
 import "./MemeActions.scss";
 import { ArrowUp, ArrowDown, ChatText } from "phosphor-react";
 import { motion } from "framer-motion";

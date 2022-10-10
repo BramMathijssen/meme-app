@@ -1,5 +1,6 @@
 import React from "react";
-import './Header.scss';
+import { NavLink } from "react-router-dom";
+import "./Header.scss";
 
 const Header: React.FC = () => {
   return (
@@ -7,9 +8,15 @@ const Header: React.FC = () => {
       <div className="header__logo">Chonks</div>
       <nav className="header__navigation">
         <ul>
-          <li>Register</li>
-          <li>Login</li>
-          <li>Upload Meme</li>
+          <li>
+            <NavLink to="/register">Register</NavLink>
+          </li>
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+          <li>
+            <NavLink to="/upload">Upload Meme</NavLink>
+          </li>
         </ul>
       </nav>
     </header>
