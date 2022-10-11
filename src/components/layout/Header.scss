@@ -24,13 +24,18 @@
     align-items: center;
   }
 
-  &__navigation ul li:last-child {
+  &__ul li a{
+    text-decoration: none;
+    color: white;
+  }
+
+  &__ul li:last-child a{
     color: white;
     padding: 10px;
     background: linear-gradient(
       135deg,
       rgba(50, 236, 118, 1) 0%,
-      rgba(16, 208, 86, 1) 100%
+      rgb(6, 223, 86) 100%
     );
     border-radius: 7px;
   }
