@@ -1,8 +1,15 @@
 import "./MemeActions.scss";
 import { ArrowUp, ArrowDown, ChatText } from "phosphor-react";
 import { motion } from "framer-motion";
+import { useSelector, useDispatch } from "react-redux";
+import { voteActions } from "./../../store/index";
+import { useAppSelector, useAppDispatch} from "../../hooks/typedHooks";
 
 const MemeActions = () => {
+
+  //const votesResult = useSelector((state: RootState) => state.result);
+  const votesResult = useAppSelector((state) => state.result)
+
   return (
     <div className="actions">
       <div className="actions__controls">
