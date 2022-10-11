@@ -12,11 +12,12 @@ const votesSlice = createSlice({
     name: 'votes',
     initialState: initialState,
     reducers: {
-        increment(state) {
+        upVote(state) {
+            console.log(`clicked`)
             state.upVotes++;
             state.result++;
         },
-        decrement(state) {
+        downVote(state) {
             state.downVotes++
             state.result--;
         }

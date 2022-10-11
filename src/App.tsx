@@ -6,7 +6,7 @@ import Register from "./pages/Register";
 import Upload from "./pages/Upload";
 import Login from "./pages/Login";
 
-function App() {
+const App = () => {
   return (
     <React.Fragment>
       <Header />
