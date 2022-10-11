@@ -4,19 +4,20 @@ import { motion } from "framer-motion";
 import { voteActions } from "./../../store/index";
 import { useAppSelector, useAppDispatch } from "../../hooks/typedHooks";
 
-const MemeActions = () => {
+const MemeActions = (props: {memeId: string}) => {
   //const votesResult = useSelector((state: RootState) => state.result);
   const votesResult = useAppSelector((state) => state.result);
+  const itemsList = useAppSelector((state) => state.itemsList);
   const dispatch = useAppDispatch();
 
   const upVoteHandler = () => {
-    dispatch(voteActions.upVote());
+    dispatch(voteActions.upVote(props.memeId));
   };
 
   const downVoteHandler = () => {
     dispatch(voteActions.downVote());
   };
-
+  console.dir(itemsList)
   return (
     <div className="actions">
       <div className="actions__controls">

@@ -2,7 +2,8 @@ import React from "react";
 import MemeActions from "./MemeActions";
 import "./MemeItem.scss";
 
-const MemeItem: React.FC<{ title: string; image: string }> = (props) => {
+const MemeItem: React.FC<{ id: string, title: string; image: string }> = (props) => {
+  console.log(props);
   return (
     <React.Fragment>
       <div className="meme-item">
@@ -10,7 +11,7 @@ const MemeItem: React.FC<{ title: string; image: string }> = (props) => {
         <div className="meme-item__container">
           <img className="meme-item__image" src={props.image} alt="test"></img>
         </div>
-        <MemeActions />
+        <MemeActions memeId={props.id}/>
       </div>
     </React.Fragment>
   );

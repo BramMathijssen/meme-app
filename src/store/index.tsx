@@ -3,19 +3,21 @@ import { createSlice, configureStore } from '@reduxjs/toolkit';
 export type votesState = Readonly<{
     upVotes: number;
     downVotes: number;
-    result: number
+    result: number;
+    itemsList: Array<{id: string, result: number}>;
 }>
 
-const initialState: votesState = {upVotes: 0, downVotes: 0, result: 0}
+const initialState: votesState = {upVotes: 0, downVotes: 0, result: 0, itemsList: []}
 
 const votesSlice = createSlice({
     name: 'votes',
     initialState: initialState,
     reducers: {
-        upVote(state) {
-            console.log(`clicked`)
+        upVote(state, action) {
             state.upVotes++;
             state.result++;
+            const obj = {id: action.payload, result: state.result}
+            state.itemsList.push(obj)
         },
         downVote(state) {
             state.downVotes++
