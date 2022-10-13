@@ -8,13 +8,18 @@
   color: #32ec76;
 
   &__logo {
-    padding: 7px;
+    padding: 9px;
     border-radius: 5px;
     color: white;
-    font-size: 25px;
+    font-size: 24px;
     background: -webkit-linear-gradient(-45deg, #e43307, #cc10d3, #23d5ab);
     background-size: 200% 200%;
     animation: gradient 8s ease infinite;
+  }
+
+  &__logo a {
+    text-decoration: none;
+    color: white;
   }
 
   &__navigation ul {
@@ -24,12 +29,12 @@
     align-items: center;
   }
 
-  &__ul li a{
+  &__ul li a {
     text-decoration: none;
     color: white;
   }
 
-  &__ul li:last-child a{
+  &__ul li:last-child a {
     color: white;
     padding: 10px;
     background: linear-gradient(
@@ -38,6 +43,9 @@
       rgb(6, 223, 86) 100%
     );
     border-radius: 7px;
+  }
+
+  &__ul li:last-child a:focus {
   }
 }
 

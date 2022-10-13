@@ -5,7 +5,9 @@ import "./Header.scss";
 const Header: React.FC = () => {
   return (
     <header className="header">
-      <div className="header__logo">Chonks</div>
+      <div className="header__logo">
+      <NavLink to="/">Chonks</NavLink>
+      </div>
       <nav className="header__navigation">
         <ul className="header__ul">
           <li className="header__li">
