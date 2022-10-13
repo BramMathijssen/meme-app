@@ -30,7 +30,7 @@ const UploadMemeForm = () => {
   const addMemeHandler = async (event: any) => {
     event.preventDefault();
     const meme = {
-      title: "test",
+      title: titleRef.current?.value
     };
     const response = await fetch(
       "https://meme-app-3ff8a-default-rtdb.europe-west1.firebasedatabase.app/memes.json",
@@ -63,7 +63,6 @@ const UploadMemeForm = () => {
               maxFiles={1}
               multiple={false}
               accept="image/*"
-              onSubmit={handleSubmit}
             />
           </div>
           <button className="form__button" type="submit">
