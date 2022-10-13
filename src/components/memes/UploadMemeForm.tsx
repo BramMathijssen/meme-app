@@ -1,13 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import "react-dropzone-uploader/dist/styles.css";
-import Dropzone, {
-  IDropzoneProps,
-  ILayoutProps,
-} from "react-dropzone-uploader";
+import Dropzone, {IDropzoneProps,ILayoutProps,} from "react-dropzone-uploader";
+import { ref } from "firebase/storage";
+import { storage } from "./../../config/firebase";
+import { v4} from 'uuid'
+
 import "./UploadMemeForm.scss";
+
 
 const UploadMemeForm = () => {
   const titleRef = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState<File>();
+
   // specify upload params and url for your file
   const getUploadParams: IDropzoneProps["getUploadParams"] = ({ meta }) => {
     return { url: "https://httpbin.org/post" };
@@ -18,8 +22,11 @@ const UploadMemeForm = () => {
     { meta, file },
     status
   ) => {
+    setImage(file);
     console.log(status, meta, file);
   };
+  console.log(`🍕 IMG`);
+  console.log(image);
 
   // receives array of files that are done uploading when submit button is clicked
   const handleSubmit: IDropzoneProps["onSubmit"] = (files, allFiles) => {
@@ -30,7 +37,7 @@ const UploadMemeForm = () => {
   const addMemeHandler = async (event: any) => {
     event.preventDefault();
     const meme = {
-      title: titleRef.current?.value
+      title: titleRef.current?.value,
     };
     const response = await fetch(
       "https://meme-app-3ff8a-default-rtdb.europe-west1.firebasedatabase.app/memes.json",
