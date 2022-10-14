@@ -60,6 +60,17 @@
     border: none;
     width: 100px;
     cursor: pointer;
+    margin-right: 15px;
+  }
+
+  .cancel{
+    background-color:#1e293b;
+    border: 1px solid white;
+  }
+
+  .cancel:hover{
+    background-color: white;
+    color:#1e293b;
   }
 
   &__button:hover{

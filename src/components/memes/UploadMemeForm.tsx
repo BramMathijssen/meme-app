@@ -9,6 +9,7 @@ import { storage } from "./../../config/firebase";
 import { v4 } from "uuid";
 
 import "./UploadMemeForm.scss";
+import { NavLink } from "react-router-dom";
 
 const UploadMemeForm = () => {
   const titleRef = useRef<HTMLInputElement>(null);
@@ -28,7 +29,7 @@ const UploadMemeForm = () => {
     console.log(status, meta, file);
   };
 
-  // uploading image to firebase 
+  // uploading image to firebase
   const uploadImage = async () => {
     if (image === null || undefined) return;
     const imageRef = ref(storage, `images/${image!.name + v4()}`);
@@ -87,7 +88,12 @@ const UploadMemeForm = () => {
               accept="image/*"
             />
           </div>
-          <button className="form__button" type="submit">
+          <NavLink to="/">
+            <button className="form__button cancel" type="submit">
+              Cancel
+            </button>
+          </NavLink>
+          <button className="form__button active" type="submit">
             Submit
           </button>
         </form>
