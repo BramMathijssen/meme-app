@@ -4,7 +4,7 @@ import Dropzone, {
   IDropzoneProps,
   ILayoutProps,
 } from "react-dropzone-uploader";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "./../../config/firebase";
 import { v4 } from "uuid";
 
@@ -13,6 +13,7 @@ import "./UploadMemeForm.scss";
 const UploadMemeForm = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<any>();
+  const [imageURL, setImageURL] = useState<string>();
 
   // specify upload params and url for your file
   const getUploadParams: IDropzoneProps["getUploadParams"] = ({ meta }) => {
@@ -27,29 +28,27 @@ const UploadMemeForm = () => {
     setImage(file);
     console.log(status, meta, file);
   };
-  console.log(`🍕 IMG`);
-  console.log(image);
 
-  // receives array of files that are done uploading when submit button is clicked
-  const handleSubmit: IDropzoneProps["onSubmit"] = (files, allFiles) => {
-    console.log(files.map((f) => f.meta));
-    allFiles.forEach((f) => f.remove());
-  };
-
-  const uploadImage = () => {
+  // uploads the image to firebase storage, returns the image URL and sets the imageURL to state.
+  const uploadImage = async() => {
     if (image === null || undefined) return;
     const imageRef = ref(storage, `images/${image!.name + v4()}`);
     console.log(imageRef);
-    uploadBytes(imageRef, image).then(() => {
-      console.log(` ✅ image uploaded`);
-    });
+    uploadBytes(imageRef, image).then(snapshot => {
+      return getDownloadURL(snapshot.ref)}).then(downloadURL => {
+        setImageURL(downloadURL)
+        console.log(`downloadURL`, downloadURL);
+      })
   };
 
+  // executes uploadImage, makes a meme object with the inputed title from ref and gets the corresponding imageURL, and posts the meme to firebase's realtime DB
   const addMemeHandler = async (event: any) => {
     event.preventDefault();
-    uploadImage();
+    await uploadImage();
+
     const meme = {
       title: titleRef.current?.value,
+      imageURL: imageURL
     };
     const response = await fetch(
       "https://meme-app-3ff8a-default-rtdb.europe-west1.firebasedatabase.app/memes.json",
