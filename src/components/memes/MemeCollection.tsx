@@ -2,8 +2,10 @@ import React from "react";
 import "./MemeCollection.scss";
 import { memesData } from "../../data/memesData";
 import MemeItem from "./MemeItem";
+import {getAllMemes} from './../../lib/api'
 
 const MemeCollection: React.FC = () => {
+  console.log(getAllMemes());
   return (
     <div className="container">
       <div className="memes">

@@ -13,7 +13,6 @@ import "./UploadMemeForm.scss";
 const UploadMemeForm = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<any>();
-  const [imageURL, setImageURL] = useState<string>();
 
   // specify upload params and url for your file
   const getUploadParams: IDropzoneProps["getUploadParams"] = ({ meta }) => {
@@ -29,27 +28,24 @@ const UploadMemeForm = () => {
     console.log(status, meta, file);
   };
 
-  // uploads the image to firebase storage, returns the image URL and sets the imageURL to state.
-  const uploadImage = async() => {
+  const uploadImage = async () => {
     if (image === null || undefined) return;
     const imageRef = ref(storage, `images/${image!.name + v4()}`);
-    console.log(imageRef);
-    uploadBytes(imageRef, image).then(snapshot => {
-      return getDownloadURL(snapshot.ref)}).then(downloadURL => {
-        setImageURL(downloadURL)
-        console.log(`downloadURL`, downloadURL);
-      })
+
+    const snapshot = await uploadBytes(imageRef, image);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+
+    return downloadURL;
   };
 
-  // executes uploadImage, makes a meme object with the inputed title from ref and gets the corresponding imageURL, and posts the meme to firebase's realtime DB
-  const addMemeHandler = async (event: any) => {
-    event.preventDefault();
-    await uploadImage();
-
+  const addMeme = async (URL: any) => {
     const meme = {
+      id: v4(),
       title: titleRef.current?.value,
-      imageURL: imageURL
+      imageURL: URL,
+      upvotes: 0,
     };
+
     const response = await fetch(
       "https://meme-app-3ff8a-default-rtdb.europe-west1.firebasedatabase.app/memes.json",
       {
@@ -64,11 +60,19 @@ const UploadMemeForm = () => {
     console.log(data);
   };
 
+  // executes uploadImage, makes a meme object with the inputed title from ref and gets the corresponding imageURL, and posts the meme to firebase's realtime DB
+  const submitHandler = async (event: any) => {
+    event.preventDefault();
+
+    const URL = await uploadImage();
+    const res = await addMeme(URL);
+  };
+
   return (
     <div className="container">
       <h2 className="title">Upload Your Meme</h2>
       <div className="card">
-        <form className="form" onSubmit={addMemeHandler}>
+        <form className="form" onSubmit={submitHandler}>
           <div className="form__topic">
             <label className="form__label">Title</label>
             <input className="form__input" type="text" ref={titleRef}></input>
