@@ -1,10 +1,12 @@
-import React from 'react'
-import MemeCollection from '../components/memes/MemeCollection'
+import React from "react";
+import MemeCollection from "../components/memes/MemeCollection";
 
 const Memes = () => {
   return (
-    <MemeCollection />
-  )
-}
+    <React.Fragment>
+      <MemeCollection />
+    </React.Fragment>
+  );
+};
 
-export default Memes
+export default Memes;

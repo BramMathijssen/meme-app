@@ -28,6 +28,7 @@ const UploadMemeForm = () => {
     console.log(status, meta, file);
   };
 
+  // uploading image to firebase 
   const uploadImage = async () => {
     if (image === null || undefined) return;
     const imageRef = ref(storage, `images/${image!.name + v4()}`);
@@ -57,7 +58,6 @@ const UploadMemeForm = () => {
       }
     );
     const data = await response.json();
-    console.log(data);
   };
 
   // executes uploadImage, makes a meme object with the inputed title from ref and gets the corresponding imageURL, and posts the meme to firebase's realtime DB

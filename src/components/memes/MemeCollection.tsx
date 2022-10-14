@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MemeCollection.scss";
-import { memesData } from "../../data/memesData";
 import MemeItem from "./MemeItem";
-import {getAllMemes} from './../../lib/api'
+import { getAllMemes } from "./../../lib/api";
+import { memeObj } from "../../models/meme";
 
-const MemeCollection: React.FC = () => {
-  console.log(getAllMemes());
+const MemeCollection = () => {
+  const [memes, setMemes] = useState<memeObj[]>([]);
+
+  useEffect(() => {
+    const fetchMemes = async () => {
+      const res = await getAllMemes();
+      console.log(res);
+      setMemes(res);
+    };
+    fetchMemes();
+  }, []);
+
   return (
-    <div className="container">
-      <div className="memes">
-        {memesData.map((meme) => (
-          <MemeItem key={meme.id} id={meme.id} title={meme.title} image={meme.image}></MemeItem>
-        ))}
+    <React.Fragment>
+      <div className="container">
+        <div className="memes">
+          {memes.map((meme) => (
+            <MemeItem
+              key={meme.id}
+              id={meme.id}
+              title={meme.title}
+              image={meme.image}
+            ></MemeItem>
+          ))}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
