@@ -4,7 +4,12 @@ import { motion } from "framer-motion";
 import { voteActions } from "./../../store/index";
 import { useAppSelector, useAppDispatch } from "../../hooks/typedHooks";
 
-const MemeActions = (props: {memeId: string}) => {
+type MemeActionsProps = {
+  memeId: string,
+  upvotes: number
+}
+
+const MemeActions = (props: MemeActionsProps) => {
   //const votesResult = useSelector((state: RootState) => state.result);
   const votesResult = useAppSelector((state) => state.result);
   const itemsList = useAppSelector((state) => state.itemsList);
@@ -29,7 +34,7 @@ const MemeActions = (props: {memeId: string}) => {
         >
           <ArrowUp color="#32ec76" size={25} />
         </motion.a>
-        <p>{votesResult}</p>
+        <p>{props.upvotes}</p>
         <motion.a
           whileHover={{
             scale: 1.2,

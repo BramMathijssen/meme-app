@@ -4,7 +4,7 @@ import MemeItem from "./MemeItem";
 import { getAllMemes } from "./../../lib/api";
 import { memeObj } from "../../models/meme";
 
-const MemeCollection = () => {
+const MemeCollection: React.FC = () => {
   const [memes, setMemes] = useState<memeObj[]>([]);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const MemeCollection = () => {
               id={meme.id}
               title={meme.title}
               image={meme.image}
+              upvotes={meme.upvotes}
             ></MemeItem>
           ))}
         </div>
