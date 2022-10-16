@@ -27,6 +27,10 @@ export async function getSingleMeme() {}
 
 export async function addMeme() {}
 
+export async function addVote() {
+  
+}
+
 export async function getAllComments() {}
 
 export async function addComment() {}
