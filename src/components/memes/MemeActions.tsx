@@ -1,7 +1,7 @@
 import "./MemeActions.scss";
 import { ArrowUp, ArrowDown, ChatText } from "phosphor-react";
 import { motion } from "framer-motion";
-import { voteActions } from "./../../store/index";
+import { voteActions } from "../../store/index_old";
 import { useAppSelector, useAppDispatch } from "../../hooks/typedHooks";
 
 type MemeActionsProps = {
